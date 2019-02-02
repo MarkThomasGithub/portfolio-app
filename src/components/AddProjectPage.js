@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ProjectForm from './ProjectForm';
-import { addProject } from '../actions/projects';
+import { startAddProject } from '../actions/projects';
 
 const AddProjectPage = (props) => (
     <div>
         <h3>Add Project</h3>
         <ProjectForm onSubmit={(project) => {
-            props.dispatch(addProject(project));
+            props.dispatch(startAddProject(project));
             props.history.push('/');
         }}
         />
