@@ -37,6 +37,14 @@ export const removeProject = ({ id } = {}) => ({
     id
 });
 
+export const startRemoveProject = ({ id } = {}) => {
+    return (dispatch) => {
+        return database.ref('projects').child(id).remove().then(() => {
+            dispatch(removeProject({id}));
+        });
+    };
+};
+
 //EDIT_EXPENSE
 
 export const editProject = (id, updates) => ({
