@@ -53,6 +53,15 @@ export const editProject = (id, updates) => ({
     updates
 });
 
+export const startEditProject = (id, updates) => {
+    return (dispatch) => {
+        return database.ref('projects').child(id).update(updates).then(() => {
+            dispatch(editProject(id, updates));
+            console.log("editing occurred");
+        });
+    };
+};
+
 //SET_PROJECTS
 
 export const setProjects = (projects) => ({

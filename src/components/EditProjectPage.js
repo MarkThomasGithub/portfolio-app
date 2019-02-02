@@ -1,7 +1,7 @@
 import React from 'react';
 import ProjectForm from './ProjectForm';
 import { connect } from 'react-redux';
-import { editProject, addProject } from '../actions/projects';
+import { startEditProject, addProject } from '../actions/projects';
 
 const EditProjectPage = (props) => {
     console.log(props);
@@ -9,12 +9,15 @@ const EditProjectPage = (props) => {
         <div>
             Editing project with id of {props.match.params.id}
             <ProjectForm 
-                project={props.project}
-                onSubmit={(project) => {
-                props.dispatch(editProject(props.match.params.id, project));
-                console.log('edited project: ', project);
-                props.history.push('/');
-            }}
+                project = {props.project}
+                onSubmit = {
+                    (project) => {
+                        props.dispatch(startEditProject(props.match.params.id, project));
+                        //props.dispatch(editProject(props.match.params.id, project));
+                        //console.log('edited project: ', project);
+                        props.history.push('/');
+                    }
+                }
             />
         </div>
     );
