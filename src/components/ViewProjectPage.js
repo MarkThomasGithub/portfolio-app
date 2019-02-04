@@ -8,6 +8,7 @@ const ViewProjectPage = (props) => {
             Viewing project with id of {props.match.params.id}
             <h3>{props.project.title}</h3>
             <p>{props.project.description}</p>
+            <img src={props.project.image}/>
         </div>
     );
 };

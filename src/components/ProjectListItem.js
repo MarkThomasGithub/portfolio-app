@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startRemoveProject } from '../actions/projects';
 
-const ProjectListItem = ({ dispatch, id, description, title }) => (
+const ProjectListItem = ({ dispatch, id, description, title, image }) => (
     <div>
         <Link to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
         <p>{description}</p>
+        <img src={image}/>
         <button onClick={()=>{
             dispatch(startRemoveProject({id}));
         }}>Remove</button>

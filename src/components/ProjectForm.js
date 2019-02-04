@@ -7,7 +7,8 @@ export default class ProjectForm extends React.Component{
         
         this.state={
             title: props.project ? props.project.title : '',
-            description: props.project ? props.project.description : ''
+            description: props.project ? props.project.description : '',
+            image: props.project ? props.project.image : null
         };
     }
 
@@ -19,11 +20,17 @@ export default class ProjectForm extends React.Component{
         const description = e.target.value;
         this.setState(()=>({description}));
     };
+    onImageChange = (e) =>{
+        const image = e.target.files[0];
+        this.setState(()=>({image}));
+    };
+
     onSubmit = (e) => {
         e.preventDefault();
         this.props.onSubmit({
             title: this.state.title,
-            description: this.state.description
+            description: this.state.description,
+            image: this.state.image
         });
     };
     render(){
@@ -34,8 +41,11 @@ export default class ProjectForm extends React.Component{
                     autoFocus value={this.state.title} onChange={this.onTitleChange}/>
                     <input type="text" placeholder="Description" 
                     value={this.state.description} onChange={this.onDescriptionChange}/>
+                    <input type="file" onChange={this.onImageChange} />
                     <button>{this.buttonTxt}</button>
                 </form>
+                <img src={this.state.image} />
+                {console.log("state", this.state)}
             </div>
         )
     }

@@ -1,31 +1,54 @@
 import uuid from 'uuid';
 import database from '../firebase/firebase';
+import { storage } from '../firebase/firebase';
 
 //action generators for projects
 
 //ADD_PROJECT - action
-export const addProject = (project) => ({
-    type: 'ADD_PROJECT',
-    project
-});
+export const addProject = (project) => {
+    console.log("add project:",project);
+    return {
+        type: 'ADD_PROJECT',
+        project
+    };
+};
+    
 
 export const startAddProject = (projectData = {}) => {
     return (dispatch) => {
         const {
             description = '',
-            title = ''
+            title = '',
+            image
         } = projectData;
 
         const project = { 
             title,
-            description
+            description,
+            image
         };
 
-        database.ref('projects').push(project).then((ref) => {
-            dispatch(addProject({
-                id: ref.key,
-                ...project
-            }));
+        console.log(project.image);
+
+        const imageId = uuid();
+
+        const uploadImage = storage.ref('images').child(imageId.toString()).put(project.image);
+
+        uploadImage.on('state_changed', (snapshot)=>(null), (error)=>(console.log(error)), () => {
+            storage.ref('images').child(imageId).getDownloadURL().then((url)=>{
+                database.ref('projects').push({
+                    ...project,
+                    image: url,
+                    imageStorageRef: imageId
+                }).then((ref) => {
+                    dispatch(addProject({
+                        id: ref.key,
+                        ...project,
+                        image: url,
+                        imageStorageRef: imageId
+                    }));
+                });
+            });
         });
     };
 };
@@ -39,8 +62,19 @@ export const removeProject = ({ id } = {}) => ({
 
 export const startRemoveProject = ({ id } = {}) => {
     return (dispatch) => {
-        return database.ref('projects').child(id).remove().then(() => {
-            dispatch(removeProject({id}));
+        let imageStorageRef = null;
+        database.ref('projects').child(id).once('value').then((snapshot)=>{
+            imageStorageRef = snapshot.val().imageStorageRef;
+            console.log(imageStorageRef);
+
+            return database.ref('projects').child(id).remove().then(() => {
+                storage.ref('images').child(imageStorageRef).delete().then(()=>{
+                    console.log("image deleted successfully");
+                }).catch((e)=>{
+                    console.log("image deletion failed with", e);
+                });
+                dispatch(removeProject({id}));
+            });
         });
     };
 };

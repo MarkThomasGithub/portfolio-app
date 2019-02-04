@@ -14,7 +14,9 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-export { firebase, database as default };
+const storage = firebase.storage();
+
+export { storage, firebase, database as default };
 
 // //child_removed subscriber
 // database.ref('projects').on('child_removed', (snapshot) => {
