@@ -5,7 +5,7 @@ import { startAddProject } from '../actions/projects';
 
 const AddProjectPage = (props) => (
     <div>
-        <h3>Add Project</h3>
+        <h2>Add Project</h2>
         <ProjectForm onSubmit={(project) => {
             props.dispatch(startAddProject(project));
             props.history.push('/');

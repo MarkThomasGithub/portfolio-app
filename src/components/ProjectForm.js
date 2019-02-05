@@ -39,9 +39,12 @@ export default class ProjectForm extends React.Component{
                 <form onSubmit={this.onSubmit}>
                     <input type="text" placeholder="Title" 
                     autoFocus value={this.state.title} onChange={this.onTitleChange}/>
-                    <input type="text" placeholder="Description" 
+                    <br/>
+                    <textarea type="text" placeholder="Description" 
                     value={this.state.description} onChange={this.onDescriptionChange}/>
+                    <br/>
                     <input type="file" onChange={this.onImageChange} />
+                    <br/>
                     <button>{this.buttonTxt}</button>
                 </form>
                 <img src={this.state.image} />

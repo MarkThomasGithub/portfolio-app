@@ -9,8 +9,8 @@ import Header from '../components/Header';
 
 const AppRouter = () => (
     <BrowserRouter>
-        <div>
-            <Header/>
+        <div id="app-box">
+            <Header />
             <Switch>
                 <Route path="/" component={ProjectDashboardPage} exact={true}/>
                 <Route path="/create" component={AddProjectPage}/>

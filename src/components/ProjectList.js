@@ -4,10 +4,12 @@ import ProjectListItem from './ProjectListItem';
 
 const ProjectList = (props) => (
     <div>
-        <h1>Project List</h1>
-        {props.projects.map((project) => {
-            return <ProjectListItem key={project.id}{...project}/>
-        })}
+        <h2>Project List</h2>
+        <div id="project-list">
+            {props.projects.map((project) => {
+                return <ProjectListItem key={project.id}{...project}/>
+            })}
+        </div>
     </div>
 );
 

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { startRemoveProject } from '../actions/projects';
 
 const ProjectListItem = ({ dispatch, id, description, title, image }) => (
-    <div>
-        <Link to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
+    <div className="project">
+        <Link className="project__title" to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
         <p>{description}</p>
         <img src={image}/>
         <button onClick={()=>{
