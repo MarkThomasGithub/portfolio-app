@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ProjectListItem from './ProjectListItem';
+import { withRouter } from 'react-router';
 
 const ProjectList = (props) => (
     <div>

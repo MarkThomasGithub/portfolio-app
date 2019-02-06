@@ -108,6 +108,16 @@ h1 {
   font-size: 1.2em;
   color: $primary-3;
   text-decoration: none;
+  transition: background-color 0.25s ease-in-out;
+  -moz-transition: background-color 0.25s ease-in-out;
+  -webkit-transition: background-color 0.25s ease-in-out;
+}
+
+.navlink:hover, .project:hover{
+  background-color: fade-out(lightgray, 0.55);
+  transition: background-color 0.25s ease-in-out;
+  -moz-transition: background-color 0.25s ease-in-out;
+  -webkit-transition: background-color 0.25s ease-in-out;
 }
 
 .is-active {
@@ -116,22 +126,92 @@ h1 {
 
 .project {
   background-color: fade-out(lightgray, 0.75);
-  width: 300px;
+  width: 350px;
+  height: 400px;
   padding: 8px;
   text-align: center;
   border-radius: 1%;
   justify-self: center;
   margin-top: 16px;
-}
-
-#project-list {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto;
+  transition: background-color 0.25s ease-in-out;
+  -moz-transition: background-color 0.25s ease-in-out;
+  -webkit-transition: background-color 0.25s ease-in-out;
+  cursor: pointer;
+  position:relative;
 }
 
 h2 {
   font-size: 2em;
   font-weight: bold;
   color: $primary-1;
+}
+
+@media (min-width:1500px) {
+  #project-list {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto;
+  }
+}
+
+@media (min-width:551px) and (max-width: 1499px) {
+  #project-list {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+  }
+}
+
+@media ( max-width:550px ) {
+
+  #project-list {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+  }
+  
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right:8px;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 12px; /* one half of ( (border * 2) + height + padding ) */
+  color: white;
+  font: bold 15px/13px Helvetica, Verdana, Tahoma;
+  height: 16px; 
+  padding: 4px 3px 0 3px;
+  text-align: center;
+  min-width: 14px;
+  transition: background-color 0.2s ease-in-out;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
+}
+
+.close-button:hover {
+  border: 2px solid darkred;
+  background-color: darkred;
+  transition: background-color 0.2s ease-in-out;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
+}
+
+.edit-button{
+  position: absolute;
+  top: 8px;
+  left:8px;
+  background-color: $primary-2;
+  transition: background-color 0.2s ease-in-out;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: $primary-3;
+  transition: background-color 0.2s ease-in-out;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
 }
