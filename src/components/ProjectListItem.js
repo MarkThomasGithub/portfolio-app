@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startRemoveProject } from '../actions/projects';
 import { withRouter } from 'react-router';
+import ProgressiveImage from 'react-progressive-image';
 
 const ProjectListItem = ({ dispatch, id, description, title, image, history }) => (
     <div className="project" onClick={()=>{history.push('/projects/'.concat(id))}}>
@@ -12,7 +13,13 @@ const ProjectListItem = ({ dispatch, id, description, title, image, history }) =
         }}>X</div>
         <Link className="project__title" to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
         <p>{description}</p>
-        <img src={image}/>
+
+        <ProgressiveImage src={image} placeholder="/images/loader.gif">
+            {(src, loading) => (
+                <img style={{ opacity: loading ? 0.2 : 1}} src={src} alt="an image" />
+            )}
+        </ProgressiveImage>
+
         <br/>
         <button className="edit-button" onClick={(e)=>{
             e.stopPropagation();

@@ -89,10 +89,49 @@ export const editProject = (id, updates) => ({
 
 export const startEditProject = (id, updates) => {
     return (dispatch) => {
+        const imageId = uuid();
+
+        console.log("my obj", updates);
+
+        if(typeof updates.image !== 'string'){
+            const uploadImage = storage.ref('images').child(imageId.toString()).put(updates.image);
+    
+            uploadImage.on('state_changed', (snapshot)=>(null), (error)=>(console.log(error)), () => {
+                storage.ref('images').child(imageId).getDownloadURL().then((url)=>{
+                    dispatch(editProject(id, {
+                        id: id,
+                        ...updates,
+                        image: url,
+                        imageStorageRef: imageId
+                    }));
+                    database.ref('projects').child(id).update({
+                        id: id,
+                        ...updates,
+                        image: url,
+                        imageStorageRef: imageId
+                    });
+                    console.log("editing occurred");
+                });
+            });
+        }
+        else{
+            dispatch(editProject(id, {
+                id: id,
+                ...updates,
+            }));
+            database.ref('projects').child(id).update({
+                id: id,
+                ...updates,
+            });
+        }
+
+
+        /*
+        old edit code in dispatch
         return database.ref('projects').child(id).update(updates).then(() => {
             dispatch(editProject(id, updates));
             console.log("editing occurred");
-        });
+        });*/
     };
 };
 
