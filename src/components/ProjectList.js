@@ -8,6 +8,9 @@ const ProjectList = (props) => (
         <h2>Project List</h2>
         <div id="project-list">
             {props.projects.map((project) => {
+                console.log("PROJECT: ", {...project});
+            })}
+            {props.projects.map((project) => {
                 return <ProjectListItem key={project.id}{...project}/>
             })}
         </div>
@@ -15,6 +18,7 @@ const ProjectList = (props) => (
 );
 
 const mapStateToProps = (state) => {
+    console.log("STATE ", state);
     return {
         projects: state.projects
     };

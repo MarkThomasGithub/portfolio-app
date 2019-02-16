@@ -19,37 +19,117 @@ export const startAddProject = (projectData = {}) => {
         const {
             description = '',
             title = '',
-            image
+            images
         } = projectData;
 
         const project = { 
             title,
             description,
-            image
+            images
         };
 
-        console.log(project.image);
+        console.log(project.images);
 
         const imageId = uuid();
 
-        const uploadImage = storage.ref('images').child(imageId.toString()).put(project.image);
+        const refs = [];
+        const storageRefs = [];
 
-        uploadImage.on('state_changed', (snapshot)=>(null), (error)=>(console.log(error)), () => {
-            storage.ref('images').child(imageId).getDownloadURL().then((url)=>{
-                database.ref('projects').push({
-                    ...project,
-                    image: url,
-                    imageStorageRef: imageId
-                }).then((ref) => {
-                    dispatch(addProject({
-                        id: ref.key,
-                        ...project,
-                        image: url,
-                        imageStorageRef: imageId
-                    }));
+        let count = 0;
+
+        //
+
+        for(let i=0;i<project.images.length;i++){
+            (function(imgStoreLazyRef){
+                const upload = storage.ref('images').child(imgStoreLazyRef).put(project.images[i]).then( snapshot => {
+                    var downloadURL = storage.ref('images').child(imgStoreLazyRef).getDownloadURL().then( ref => {
+                        refs.push(ref);
+                        count++;
+                        database.ref('projects').child(imageId).update(
+                            {
+                                id: imageId,
+                                ...project,
+                                images: refs,
+                            }
+                        ).then(()=>{
+                            if(count === Array.from(project.images).length){
+                                console.log("DISPATCHED: ", refs);
+                                dispatch(addProject({
+                                    id: imageId,
+                                    ...project,
+                                    images: refs,
+                                }));
+                            } 
+                        });
+                    });
+                });
+                storageRefs.push(imgStoreLazyRef);
+
+                database.ref('projects').child(imageId).update(
+                    {
+                        imgStorages: storageRefs
+                    });
+            })(imageId.toString().concat("/"+(uuid().toString())))
+        }
+/*
+            upload.on('state_changed', (snapshot)=>(null), (error)=>(console.log(error)), () => {
+                imgStore.getDownloadURL().then((ref) =>{
+                    refs.push(ref);
+                    console.log("NOWTHIS: ", ref);
+                    count++;
+                    database.ref('projects').child(imageId).update(
+                        {
+                            id: imageId,
+                            ...project,
+                            images: refs
+                        }
+                    ).then(()=>{
+                        if(count === Array.from(project.images).length){
+                            console.log("DISPATCHED: ", refs);
+                            dispatch(addProject({
+                                id: imageId,
+                                ...project,
+                                images: refs
+                            }));
+                        } 
+                    });
                 });
             });
-        });
+        } */
+
+        //console.log("NOWTHIS", refs);
+        
+
+        //
+        /*
+        Array.from(project.images).forEach(img => {
+            imgStore = storage.ref('images').child(imageId.toString()).child(uuid().toString());
+            uploading = imgStore.put(img);
+
+            uploading.on('state_changed', (snapshot)=>(null), (error)=>(console.log(error)), () => {
+                imgStore.getDownloadURL().then((ref) =>{
+                    refs.push(ref);
+                    console.log("refs: ", refs);
+                    count++;
+                    database.ref('projects').child(imageId).update(
+                        {
+                            id: imageId,
+                            ...project,
+                            images: refs
+                        }
+                    ).then(()=>{
+                        if(count === Array.from(project.images).length){
+                            console.log("DISPATCHED: ", refs);
+                            dispatch(addProject({
+                                id: imageId,
+                                ...project,
+                                images: refs
+                            }));
+                        } 
+                    });
+                });
+            });
+        }); */
     };
 };
 
@@ -62,17 +142,22 @@ export const removeProject = ({ id } = {}) => ({
 
 export const startRemoveProject = ({ id } = {}) => {
     return (dispatch) => {
-        let imageStorageRef = null;
+        let imageStorageRefs = [];
         database.ref('projects').child(id).once('value').then((snapshot)=>{
-            imageStorageRef = snapshot.val().imageStorageRef;
-            console.log(imageStorageRef);
+
+            imageStorageRefs = snapshot.val().imgStorages;
+            console.log(imageStorageRefs);
 
             return database.ref('projects').child(id).remove().then(() => {
-                storage.ref('images').child(imageStorageRef).delete().then(()=>{
-                    console.log("image deleted successfully");
-                }).catch((e)=>{
-                    console.log("image deletion failed with", e);
+                imageStorageRefs.forEach((uri)=>{
+                    console.log("URI: ",uri);
+                    storage.ref('images').child(uri).delete().then(()=>{
+                        console.log("image deleted successfully");
+                    }).catch((e)=>{
+                        console.log("image deletion failed with", e);
+                    });
                 });
+                
                 dispatch(removeProject({id}));
             });
         });
@@ -87,32 +172,72 @@ export const editProject = (id, updates) => ({
     updates
 });
 
-export const startEditProject = (id, updates) => {
+export const startEditProject = (id, updates, imgUpdated) => {
     return (dispatch) => {
         const imageId = uuid();
+        console.log("EDIT UPDATES", updates);
 
-        console.log("my obj", updates);
-
-        if(typeof updates.image !== 'string'){
-            const uploadImage = storage.ref('images').child(imageId.toString()).put(updates.image);
+        if(imgUpdated){
+            console.log("IMGUPDATED");
+            let imageStorageRefs = [];
+            database.ref('projects').child(id).once('value').then((snapshot)=>{
     
-            uploadImage.on('state_changed', (snapshot)=>(null), (error)=>(console.log(error)), () => {
-                storage.ref('images').child(imageId).getDownloadURL().then((url)=>{
-                    dispatch(editProject(id, {
-                        id: id,
-                        ...updates,
-                        image: url,
-                        imageStorageRef: imageId
-                    }));
-                    database.ref('projects').child(id).update({
-                        id: id,
-                        ...updates,
-                        image: url,
-                        imageStorageRef: imageId
+                imageStorageRefs = snapshot.val().imgStorages;
+                console.log("IMGSTORAGEREFS", imageStorageRefs);
+    
+                return database.ref('projects').child(id).remove().then(() => {
+                    imageStorageRefs.forEach((uri)=>{
+                        console.log("URI: ",uri);
+                        storage.ref('images').child(uri).delete().then(()=>{
+                            console.log("image deleted successfully");
+                        }).catch((e)=>{
+                            console.log("image deletion failed with", e);
+                        });
                     });
-                    console.log("editing occurred");
+
+                    const refs = [];
+                    const storageRefs = [];
+    
+                    let count = 0;
+    
+                    //
+    
+                    for(let i=0;i<updates.images.length;i++){
+                        (function(imgStoreLazyRef){
+                            const upload = storage.ref('images').child(imgStoreLazyRef).put(updates.images[i]).then( snapshot => {
+                                var downloadURL = storage.ref('images').child(imgStoreLazyRef).getDownloadURL().then( ref => {
+                                    refs.push(ref);
+                                    count++;
+                                    database.ref('projects').child(id).update(
+                                        {
+                                            id: id,
+                                            ...updates,
+                                            images: refs,
+                                        }
+                                    ).then(()=>{
+                                        if(count === Array.from(updates.images).length){
+                                            console.log("DISPATCHED: ", refs);
+                                            dispatch(editProject(id, {
+                                                id: id,
+                                                ...updates,
+                                                images: refs
+                                            }));
+                                        } 
+                                    });
+                                });
+                            });
+                            storageRefs.push(imgStoreLazyRef);
+    
+                            database.ref('projects').child(id).update(
+                                {
+                                    imgStorages: storageRefs
+                                });
+                        })(id.toString().concat("/"+(uuid().toString())))
+                    }
+
                 });
             });
+            
         }
         else{
             dispatch(editProject(id, {
@@ -147,9 +272,10 @@ export const startSetProjects = (projectData = {}) => {
         return database.ref('projects').once('value').then((snapshot) => {
             const projects = [];
 
+            console.log("SETPROJECTS", snapshot.val());
             snapshot.forEach((childSnapshot)=>{
+                console.log("CHILDSNAPSHOT", childSnapshot.val());
                 projects.push({
-                    id: childSnapshot.key,
                     ...childSnapshot.val()
                 });
             });

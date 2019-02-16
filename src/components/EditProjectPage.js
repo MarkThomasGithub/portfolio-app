@@ -12,7 +12,12 @@ const EditProjectPage = (props) => {
                 project = {props.project}
                 onSubmit = {
                     (project) => {
-                        props.dispatch(startEditProject(props.match.params.id, project));
+                        if(props.project.images === project.images){
+                            props.dispatch(startEditProject(props.match.params.id, project, false));
+                        } 
+                        else{
+                            props.dispatch(startEditProject(props.match.params.id, project, true));
+                        }
                         //props.dispatch(editProject(props.match.params.id, project));
                         //console.log('edited project: ', project);
                         props.history.push('/');

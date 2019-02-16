@@ -1,5 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import database from '../firebase/firebase';
+import { storage } from '../firebase/firebase';
+import ImageElement from './ImageElement';
+import uuid from 'uuid';
 
 const ViewProjectPage = (props) => {
     console.log(props);
@@ -8,7 +12,13 @@ const ViewProjectPage = (props) => {
             Viewing project with id of {props.match.params.id}
             <h3>{props.project.title}</h3>
             <p>{props.project.description}</p>
-            <img src={props.project.image}/>
+            <div className="ViewProject__imageGrid">
+
+                {props.project.images.map((image) => {
+                    return <ImageElement key={uuid().toString()}img={image}/>
+                })}
+
+            </div>
         </div>
     );
 };

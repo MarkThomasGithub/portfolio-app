@@ -8,7 +8,7 @@ export default class ProjectForm extends React.Component{
         this.state={
             title: props.project ? props.project.title : '',
             description: props.project ? props.project.description : '',
-            image: props.project ? props.project.image : null
+            images: props.project ? props.project.images : null
         };
     }
 
@@ -21,8 +21,8 @@ export default class ProjectForm extends React.Component{
         this.setState(()=>({description}));
     };
     onImageChange = (e) =>{
-        const image = e.target.files[0];
-        this.setState(()=>({image}));
+        const images = e.target.files;
+        this.setState(()=>({images}));
     };
 
     onSubmit = (e) => {
@@ -30,24 +30,23 @@ export default class ProjectForm extends React.Component{
         this.props.onSubmit({
             title: this.state.title,
             description: this.state.description,
-            image: this.state.image
+            images: this.state.images
         });
     };
     render(){
         return(
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} encType='multipart/form-data'>
                     <input type="text" placeholder="Title" 
                     autoFocus value={this.state.title} onChange={this.onTitleChange}/>
                     <br/>
                     <textarea type="text" placeholder="Description" 
                     value={this.state.description} onChange={this.onDescriptionChange}/>
                     <br/>
-                    <input type="file" onChange={this.onImageChange} />
+                    <input type="file" onChange={this.onImageChange} multiple="multiple"/>
                     <br/>
                     <button>{this.buttonTxt}</button>
                 </form>
-                <img src={this.state.image} />
                 {console.log("state", this.state)}
             </div>
         )
