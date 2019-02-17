@@ -5,9 +5,10 @@ import { startEditProject, addProject } from '../actions/projects';
 
 const EditProjectPage = (props) => {
     console.log(props);
+    //Editing project with id of {props.match.params.id}
     return (
-        <div>
-            Editing project with id of {props.match.params.id}
+        <div className="editProject_input">
+            <h2>Edit Project</h2>
             <ProjectForm 
                 project = {props.project}
                 onSubmit = {

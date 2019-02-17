@@ -37,10 +37,10 @@ export default class ProjectForm extends React.Component{
         return(
             <div>
                 <form onSubmit={this.onSubmit} encType='multipart/form-data'>
-                    <input type="text" placeholder="Title" 
+                    <input type="text" placeholder="Title"
                     autoFocus value={this.state.title} onChange={this.onTitleChange}/>
                     <br/>
-                    <textarea type="text" placeholder="Description" 
+                    <textarea type="text" placeholder="Description" rows="10"
                     value={this.state.description} onChange={this.onDescriptionChange}/>
                     <br/>
                     <input type="file" onChange={this.onImageChange} multiple="multiple"/>

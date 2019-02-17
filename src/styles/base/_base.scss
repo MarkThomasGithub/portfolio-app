@@ -86,6 +86,7 @@ button:disabled {
   background-color: white;
   border-radius: 0.5%;
   border: 1px solid fade-out(black, 0.05);
+  overflow: auto;
 }
 
 #app-header {
@@ -128,6 +129,7 @@ h1 {
   background-color: fade-out(lightgray, 0.75);
   width: 300px;
   height: 300px;
+  max-height: 300px;
   padding: 8px;
   text-align: center;
   border-radius: 1%;
@@ -138,6 +140,11 @@ h1 {
   -webkit-transition: background-color 0.25s ease-in-out;
   cursor: pointer;
   position:relative;
+}
+
+.project img{
+  max-width: 250px;
+  max-height: 200px;
 }
 
 h2 {
@@ -202,11 +209,14 @@ h2 {
   position: absolute;
   top: 8px;
   left:8px;
+  background: none;
   background-color: $primary-2;
   transition: background-color 0.2s ease-in-out;
   -moz-transition: background-color 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s ease-in-out;
   color: white;
+  border: 0;
+  box-shadow: none;
 }
 
 .edit-button:hover {
@@ -214,4 +224,15 @@ h2 {
   transition: background-color 0.2s ease-in-out;
   -moz-transition: background-color 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s ease-in-out;
+}
+
+.addProject_input *, .editProject_input *, .projectList_title, .viewProject{
+  justify-content: center;
+  text-align: center;
+  margin: 4px;
+}
+
+.addProject_input textarea, .editProject_input textarea{
+  width: 60%;
+  height: auto;
 }

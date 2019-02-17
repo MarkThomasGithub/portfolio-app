@@ -7,10 +7,10 @@ import uuid from 'uuid';
 
 const ViewProjectPage = (props) => {
     console.log(props);
+    //Viewing project with id of {props.match.params.id}
     return (
-        <div>
-            Viewing project with id of {props.match.params.id}
-            <h3>{props.project.title}</h3>
+        <div className="viewProject">
+            <h3 className="project__title">{props.project.title}</h3>
             <p>{props.project.description}</p>
             <div className="ViewProject__imageGrid">
 

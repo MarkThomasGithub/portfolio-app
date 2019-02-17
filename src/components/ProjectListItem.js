@@ -12,7 +12,7 @@ const ProjectListItem = ({ dispatch, id, description, title, images, history }) 
             dispatch(startRemoveProject({id}));
         }}>X</div>
         <Link className="project__title" to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
-        <p>{description}</p>
+        <p>{description.substring(0,40)}</p>
 
         {console.log("PROJLISTITEM: ", {id,title,description,images})}
 

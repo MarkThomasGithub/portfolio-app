@@ -4,7 +4,7 @@ import ProjectListItem from './ProjectListItem';
 import { withRouter } from 'react-router';
 
 const ProjectList = (props) => (
-    <div>
+    <div className="projectList_title">
         <h2>Project List</h2>
         <div id="project-list">
             {props.projects.map((project) => {
