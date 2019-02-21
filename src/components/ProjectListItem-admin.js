@@ -5,8 +5,12 @@ import { startRemoveProject } from '../actions/projects';
 import { withRouter } from 'react-router';
 import ProgressiveImage from 'react-progressive-image';
 
-const ProjectListItem = ({ dispatch, id, description, title, images, history }) => (
+const ProjectListItemAdmin = ({ dispatch, id, description, title, images, history }) => (
     <div className="project" onClick={()=>{history.push('/projects/'.concat(id))}}>
+        <div className="close-button" onClick={(e)=>{
+            e.stopPropagation();
+            dispatch(startRemoveProject({id}));
+        }}>X</div>
         <Link className="project__title" to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
         <p>{description.substring(0,40)}</p>
 
@@ -18,7 +22,12 @@ const ProjectListItem = ({ dispatch, id, description, title, images, history }) 
             )}
         </ProgressiveImage>
         <br/>
+        <button className="edit-button" onClick={(e)=>{
+            e.stopPropagation();
+            history.push('/edit/'.concat(id));
+        }}>Edit
+        </button>
     </div>
 );
 
-export default withRouter(connect()(ProjectListItem));
+export default withRouter(connect()(ProjectListItemAdmin));

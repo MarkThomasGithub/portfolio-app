@@ -236,3 +236,13 @@ h2 {
   width: 60%;
   height: auto;
 }
+
+#admin-button{
+  position: absolute;
+  right:16px;
+  top:8px;
+  padding: 8px;
+  cursor: pointer;
+  color: $primary-3;
+  font-weight: bold;
+}

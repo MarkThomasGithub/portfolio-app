@@ -16,7 +16,13 @@ const database = firebase.database();
 
 const storage = firebase.storage();
 
-export { storage, firebase, database as default };
+const auth = firebase.auth();
+
+export const getCurrentUser = () =>{
+    return firebase.auth().currentUser.email;    
+}
+
+export { storage, firebase, auth, database as default };
 
 // //child_removed subscriber
 // database.ref('projects').on('child_removed', (snapshot) => {
