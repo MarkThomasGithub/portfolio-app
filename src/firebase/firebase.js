@@ -1,8 +1,9 @@
 import * as firebase from 'firebase';
+import secretApiKey from '../../server/server';
 
 // Initialize Firebase
 const config = {
-    apiKey: process.env.secretApiKey,
+    apiKey: secretApiKey,
     authDomain: "portfolio-app-1111f.firebaseapp.com",
     databaseURL: "https://portfolio-app-1111f.firebaseio.com",
     projectId: "portfolio-app-1111f",

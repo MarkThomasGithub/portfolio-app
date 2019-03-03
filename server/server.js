@@ -4,6 +4,8 @@ const app = express();
 const publicPath = path.join(__dirname, '..', 'public')
 const port = process.env.PORT || 3000; //variable set by heroku
 
+const secretApiKey = process.env.SECRET_API_KEY;
+
 app.use(express.static(publicPath));
 
 //if not in public directory serve up index.html
@@ -15,3 +17,5 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
     console.log("server online");
 });
+
+export default secretApiKey;
