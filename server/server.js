@@ -4,7 +4,7 @@ const app = express();
 const publicPath = path.join(__dirname, '..', 'public')
 const port = process.env.PORT || 3000; //variable set by heroku
 
-const secretApiKey = process.env.SECRET_API_KEY;
+const secretApiKey = process.env.REACT_APP_SECRET;
 
 app.use(express.static(publicPath));
 
