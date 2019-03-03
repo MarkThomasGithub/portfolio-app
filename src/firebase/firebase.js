@@ -1,9 +1,8 @@
 import * as firebase from 'firebase';
 
-console.log("API KEY", process.env.REACT_APP_SECRET);
 // Initialize Firebase
 const config = {
-    apiKey: process.env.REACT_APP_SECRET,
+    apiKey: "AIzaSyDVfK4qlkVL4J8CA94TFdh9DhXFihR-IZg",
     authDomain: "portfolio-app-1111f.firebaseapp.com",
     databaseURL: "https://portfolio-app-1111f.firebaseio.com",
     projectId: "portfolio-app-1111f",
