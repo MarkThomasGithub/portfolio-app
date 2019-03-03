@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
-import secretApiKey from '../../server/server';
+
+let secretApiKey = require('../../server/server');
 
 // Initialize Firebase
 const config = {

@@ -18,4 +18,4 @@ app.listen(port, () => {
     console.log("server online");
 });
 
-export default secretApiKey;
+module.exports.secretApiKey = secretApiKey;
