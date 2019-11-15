@@ -13,7 +13,6 @@ const ViewProjectPage = (props) => {
             <h3 className="project__title">{props.project.title}</h3>
             <p>{props.project.description}</p>
             <div className="ViewProject__imageGrid">
-
                 {props.project.images.map((image) => {
                     return <ImageElement key={uuid().toString()}img={image}/>
                 })}
