@@ -6,7 +6,7 @@ import ImageElement from './ImageElement';
 import uuid from 'uuid';
 
 const ViewProjectPage = (props) => {
-    console.log(props);
+    //console.log(props);
     //Viewing project with id of {props.match.params.id}
     return (
         <div className="viewProject">

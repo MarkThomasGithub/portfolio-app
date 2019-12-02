@@ -18,13 +18,13 @@ const Header = () => (
                         } else {
                             alert(errorMessage);
                         }
-                        console.log(error);
+                        //console.log(error);
                       });
                     firebase.auth().onAuthStateChanged(function(user) {
                         if (user) {
                             // User is signed in.
                             var email = user.email;
-                            console.log("USER EMAIL: ", email);
+                            //console.log("USER EMAIL: ", email);
                             window.location.reload();
                             // ...
                         } else {

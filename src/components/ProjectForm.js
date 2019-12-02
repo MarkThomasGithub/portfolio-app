@@ -47,7 +47,6 @@ export default class ProjectForm extends React.Component{
                     <br/>
                     <button>{this.buttonTxt}</button>
                 </form>
-                {console.log("state", this.state)}
             </div>
         )
     }

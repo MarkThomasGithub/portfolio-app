@@ -6,7 +6,7 @@ import { storage } from '../firebase/firebase';
 
 //ADD_PROJECT - action
 export const addProject = (project) => {
-    console.log("add project:",project);
+    //console.log("add project:",project);
     return {
         type: 'ADD_PROJECT',
         project
@@ -28,7 +28,7 @@ export const startAddProject = (projectData = {}) => {
             images
         };
 
-        console.log(project.images);
+        //console.log(project.images);
 
         const imageId = uuid();
 
@@ -53,7 +53,7 @@ export const startAddProject = (projectData = {}) => {
                             }
                         ).then(()=>{
                             if(count === Array.from(project.images).length){
-                                console.log("DISPATCHED: ", refs);
+                                //console.log("DISPATCHED: ", refs);
                                 dispatch(addProject({
                                     id: imageId,
                                     ...project,
@@ -146,15 +146,15 @@ export const startRemoveProject = ({ id } = {}) => {
         database.ref('projects').child(id).once('value').then((snapshot)=>{
 
             imageStorageRefs = snapshot.val().imgStorages;
-            console.log(imageStorageRefs);
+            //console.log(imageStorageRefs);
 
             return database.ref('projects').child(id).remove().then(() => {
                 imageStorageRefs.forEach((uri)=>{
-                    console.log("URI: ",uri);
+                    //console.log("URI: ",uri);
                     storage.ref('images').child(uri).delete().then(()=>{
-                        console.log("image deleted successfully");
+                        //console.log("image deleted successfully");
                     }).catch((e)=>{
-                        console.log("image deletion failed with", e);
+                        //console.log("image deletion failed with", e);
                     });
                 });
                 
@@ -175,23 +175,23 @@ export const editProject = (id, updates) => ({
 export const startEditProject = (id, updates, imgUpdated) => {
     return (dispatch) => {
         const imageId = uuid();
-        console.log("EDIT UPDATES", updates);
+        //console.log("EDIT UPDATES", updates);
 
         if(imgUpdated){
-            console.log("IMGUPDATED");
+            //console.log("IMGUPDATED");
             let imageStorageRefs = [];
             database.ref('projects').child(id).once('value').then((snapshot)=>{
     
                 imageStorageRefs = snapshot.val().imgStorages;
-                console.log("IMGSTORAGEREFS", imageStorageRefs);
+                //console.log("IMGSTORAGEREFS", imageStorageRefs);
     
                 return database.ref('projects').child(id).remove().then(() => {
                     imageStorageRefs.forEach((uri)=>{
-                        console.log("URI: ",uri);
+                        //console.log("URI: ",uri);
                         storage.ref('images').child(uri).delete().then(()=>{
-                            console.log("image deleted successfully");
+                            //console.log("image deleted successfully");
                         }).catch((e)=>{
-                            console.log("image deletion failed with", e);
+                            //console.log("image deletion failed with", e);
                         });
                     });
 
@@ -216,7 +216,7 @@ export const startEditProject = (id, updates, imgUpdated) => {
                                         }
                                     ).then(()=>{
                                         if(count === Array.from(updates.images).length){
-                                            console.log("DISPATCHED: ", refs);
+                                            //console.log("DISPATCHED: ", refs);
                                             dispatch(editProject(id, {
                                                 id: id,
                                                 ...updates,
@@ -272,9 +272,9 @@ export const startSetProjects = (projectData = {}) => {
         return database.ref('projects').once('value').then((snapshot) => {
             const projects = [];
 
-            console.log("SETPROJECTS", snapshot.val());
+            //console.log("SETPROJECTS", snapshot.val());
             snapshot.forEach((childSnapshot)=>{
-                console.log("CHILDSNAPSHOT", childSnapshot.val());
+                //console.log("CHILDSNAPSHOT", childSnapshot.val());
                 projects.push({
                     ...childSnapshot.val()
                 });

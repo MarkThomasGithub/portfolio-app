@@ -13,5 +13,5 @@ app.get('*', (req, res) => {
 
 //port 3000 okay for local machine but not for heroku
 app.listen(port, () => {
-    console.log("server online");
+    //console.log("server online");
 });

@@ -14,7 +14,7 @@ import { firebase } from '../firebase/firebase';
 
 const AppRouter = () => {
     if(firebase.auth().currentUser){
-        console.log("uid",firebase.auth().currentUser.uid);
+        //console.log("uid",firebase.auth().currentUser.uid);
         return (<BrowserRouter>
             <div id="app-box">
                 <HeaderAdmin />

@@ -14,8 +14,6 @@ const ProjectListItemAdmin = ({ dispatch, id, description, title, images, histor
         <Link className="project__title" to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
         <p>{description.substring(0,37)}...</p>
 
-        {console.log("PROJLISTITEM: ", {id,title,description,images})}
-
         <ProgressiveImage src={images[0]} placeholder="/images/loader.gif">
             {(src, loading) => (
                 <img style={{ opacity: loading ? 0.2 : 1}} src={src} alt="an image" />
