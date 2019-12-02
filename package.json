@@ -27,21 +27,26 @@
     "extract-text-webpack-plugin": "3.0.0",
     "firebase": "4.2.0",
     "normalize.css": "7.0.0",
-    "react": "15.6.1",
+    "react": "^15.6.2",
     "react-dom": "15.6.1",
     "react-modal": "2.2.2",
     "react-progressive-image": "^0.6.0",
+    "react-protected-mailto": "^1.0.3",
     "react-redux": "5.0.5",
     "react-router-dom": "4.2.2",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
     "sass-loader": "^7.1.0",
     "style-loader": "0.18.2",
+    "styled-components": "^3.4.10",
     "uuid": "3.1.0",
     "validator": "8.0.0",
     "webpack": "3.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "gulp-babel": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "webpack-dev-server": "2.5.1"
   }
