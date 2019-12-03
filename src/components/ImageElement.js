@@ -6,8 +6,12 @@ const ImageElement = (props) => (
         {(src, loading) => {
             if(loading) 
                 return <img style={{ opacity: 0.2}} src={src} alt="an image" />
-            else
-                return <img src={src} style={{ maxWidth: '100%' }}></img>
+            else{
+                if(props.newStyle)
+                    return <img src={src} style={props.newStyle}></img>
+                else
+                    return <img src={src} style={{ maxWidth: '100%' }}></img>
+            }
         }}
     </ProgressiveImage>
 );

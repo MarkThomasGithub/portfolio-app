@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import Mailto from 'react-protected-mailto';
+import ImageElement from './ImageElement';
 
-const ImgWrapper = styled.img`
+const ImgWrapper = styled.div`
     display: block;
     padding-top: 1em;
     border-radius: 50%;
     margin: auto;
+    text-align: center;
 `;
 
 const H3Wrapper = styled.h3`
@@ -44,7 +46,9 @@ const DivWrapper = styled.div`
 const AboutPage = () => {
     return (
         <DivWrapper>
-            <ImgWrapper src="images/profile.jfif" />
+            <ImgWrapper>
+                <ImageElement img="/images/profile.jfif" newStyle={{ 'border-radius': '50%'}} />
+            </ImgWrapper>
             <H3Wrapper>Mark Thomas - Software Developer</H3Wrapper>
             <CenterText>
                 <div>
