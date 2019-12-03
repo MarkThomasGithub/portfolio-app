@@ -37,7 +37,6 @@
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
     "sass-loader": "^7.1.0",
-    "semantic-ui-react": "^0.88.1",
     "style-loader": "0.18.2",
     "styled-components": "^3.4.10",
     "uuid": "3.1.0",
