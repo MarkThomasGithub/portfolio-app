@@ -5,6 +5,10 @@
   "author": "Mark Thomas",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "11.1.0",
+    "npm": "6.4.1"
+  },
   "dependencies": {
     "express": "4.15.4",
     "firebase": "4.2.0",
