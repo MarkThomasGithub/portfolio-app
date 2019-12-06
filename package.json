@@ -1,32 +1,18 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "engines": {
-    "node": "11.1.0"
-  },
   "main": "index.js",
   "author": "Mark Thomas",
   "license": "MIT",
   "scripts": {
-    "build:dev": "webpack",
-    "build:prod": "webpack -p --env production",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
     "dev-server": "webpack-dev-server",
-    "start": "node server/server.js",
-    "heroku-postbuild": "npm run build:prod"
+    "start": "serve -s build"
   },
   "dependencies": {
-    "babel-cli": "6.24.1",
-    "babel-core": "6.25.0",
-    "babel-loader": "7.1.1",
-    "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-plugin-transform-object-rest-spread": "6.23.0",
-    "babel-preset-env": "1.5.2",
-    "babel-preset-react": "6.24.1",
-    "css-loader": "0.28.4",
     "express": "4.15.4",
-    "extract-text-webpack-plugin": "3.0.0",
     "firebase": "4.2.0",
-    "normalize.css": "7.0.0",
     "react": "^15.6.2",
     "react-dom": "15.6.1",
     "react-modal": "2.2.2",
@@ -34,20 +20,24 @@
     "react-protected-mailto": "^1.0.3",
     "react-redux": "5.0.5",
     "react-router-dom": "4.2.2",
+    "react-scripts": "^3.3.0",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "0.18.2",
+    "serve": "^11.2.0",
     "styled-components": "^3.4.10",
     "uuid": "3.1.0",
-    "validator": "8.0.0",
-    "webpack": "3.1.0"
+    "validator": "8.0.0"
   },
-  "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "gulp-babel": "^8.0.0",
-    "gulp-sass": "^4.0.2",
-    "webpack-dev-server": "2.5.1"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
