@@ -1,6 +1,9 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
+  "engines": {
+    "node": "11.1.0"
+  },
   "main": "index.js",
   "author": "Mark Thomas",
   "license": "MIT",
