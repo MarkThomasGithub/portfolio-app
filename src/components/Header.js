@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import 'firebase/auth';
 
 const Header = () => (
-    <header id="app-header">
+    <header id="root-header">
         <div>
             <a id="admin-button" onClick={() => {
                 const password = prompt("Enter admin password for access:");

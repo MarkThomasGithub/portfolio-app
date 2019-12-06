@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import 'firebase/auth';
 
 const HeaderAdmin = () => (
-    <header id="app-header">
+    <header id="root-header">
         <div>
             <a id="admin-button" onClick={() => {
                 firebase.auth().signOut();   

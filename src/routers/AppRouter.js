@@ -16,7 +16,7 @@ const AppRouter = () => {
     if(firebase.auth().currentUser){
         //console.log("uid",firebase.auth().currentUser.uid);
         return (<BrowserRouter>
-            <div id="app-box">
+            <div id="root-box">
                 <HeaderAdmin />
                 <Switch>
                     <Route path="/" component={ProjectDashboardPageAdmin} exact={true} />
@@ -30,7 +30,7 @@ const AppRouter = () => {
         </BrowserRouter>);
     } else{
         return (<BrowserRouter>
-            <div id="app-box">
+            <div id="root-box">
                 <Header />
                 <Switch>
                     <Route path="/" component={ProjectDashboardPage} exact={true} />

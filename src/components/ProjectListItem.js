@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { startRemoveProject } from '../actions/projects';
 import { withRouter } from 'react-router';
 import ProgressiveImage from 'react-progressive-image';
+import '../index.css';
+
 
 const ProjectListItem = ({ dispatch, id, description, title, images, history }) => (
     <div className="project" onClick={()=>{history.push('/projects/'.concat(id))}}>
