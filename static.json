@@ -4,5 +4,5 @@
     "routes": {
         "/**": "index.html"
     },
-    "https_only": true
+    "https_only": false
 }
