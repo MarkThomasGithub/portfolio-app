@@ -12,9 +12,9 @@ const ProjectListItem = ({ dispatch, id, description, title, images, history }) 
         <Link className="project__title" to={'/projects/'.concat(id)}><h3>{title}</h3></Link>
         <p>{description.substring(0,37)}...</p>
 
-        <ProgressiveImage src={images[0]} placeholder="/images/loader.gif">
+        <ProgressiveImage src={images[0]} placeholder="/images/loading.jpg">
             {(src, loading) => (
-                <img style={{ opacity: loading ? 0.2 : 1 }} src={src} alt="an image" />
+                <img src={src} alt="an image" />
             )}
         </ProgressiveImage>
         <br/>
