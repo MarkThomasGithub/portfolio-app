@@ -140,6 +140,7 @@ h1 {
   -moz-transition: background-color 0.25s ease-in-out;
   -webkit-transition: background-color 0.25s ease-in-out;
   cursor: pointer;
+  position: relative;
 }
 
 .project img {

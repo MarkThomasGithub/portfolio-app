@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
+import LoadingPage from './components/LoadingPage';
 import { startSetProjects } from './actions/projects'
 import './firebase/firebase';
 
@@ -30,7 +31,7 @@ class App extends React.Component {
       );
     }
     else{
-      return <div>Loading...</div>;
+      return <LoadingPage />;
     }
   }
 
